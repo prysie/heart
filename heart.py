@@ -14,29 +14,28 @@ def heart_function(x, alpha=1.0):
     return result
 
 # Create figure
-fig, axes = plt.subplots(2, 2, figsize=(15, 8))
-axes = axes.ravel()
+plt.figure(figsize=(12, 8))
 
-# Use fewer points for faster plotting
-x = np.linspace(-2, 2, 500)
+# Use fewer points but still enough for smooth curves
+x = np.linspace(-np.sqrt(3.3), np.sqrt(3.3), 1000)
 
-# Test alpha values
-alpha_values = [0.5, 0.8, 1.0, 1.2]
+# Just plot two alpha values to compare
+alpha1, alpha2 = 1, 20
 
-for i, alpha in enumerate(alpha_values):
-    y = heart_function(x, alpha)
-    axes[i].plot(x, y, 'r-', linewidth=2)
-    axes[i].set_title(f'α = {alpha}')
-    axes[i].grid(True)
-    axes[i].set_xlabel('x')
-    axes[i].set_ylabel('y')
-    
-    # Set aspect ratio to squish vertically
-    axes[i].set_aspect(0.5)  # This makes it more squished vertically
-    
-    # Set consistent axis limits
-    axes[i].set_xlim(-2.5, 2.5)
-    axes[i].set_ylim(-2.5, 2.5)
+# Create two subplots
+plt.subplot(121)
+y1 = heart_function(x, alpha1)
+plt.plot(x, y1, 'r-', linewidth=2)
+plt.title(f'α = {alpha1}')
+plt.grid(True)
+plt.axis('equal')
+
+plt.subplot(122)
+y2 = heart_function(x, alpha2)
+plt.plot(x, y2, 'r-', linewidth=2)
+plt.title(f'α = {alpha2}')
+plt.grid(True)
+plt.axis('equal')
 
 plt.tight_layout()
 plt.show()
